@@ -3,15 +3,16 @@ from flask_cors import CORS
 
 from sqlalchemy import create_engine, Column, Integer, String, DECIMAL
 from sqlalchemy.orm import declarative_base, sessionmaker
-
+import os
 
 app = Flask(__name__)
 CORS(app)
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 engine = create_engine(
-    "mysql+pymysql://root:@localhost/store_db",
-    echo=True
+    DATABASE_URL,
+    echo=False
 )
 
 Base = declarative_base()
