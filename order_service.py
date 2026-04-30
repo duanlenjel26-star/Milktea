@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-
+import os
 import requests
 from datetime import datetime
 
@@ -24,8 +24,10 @@ PAYMENT_URL = "http://127.0.0.1:5002/process_payment"
 # DATABASE CONNECTION
 # =========================================================
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
 engine = create_engine(
-    "mysql+pymysql://root:@localhost/store_db",
+    DATABASE_URL,
     echo=False
 )
 
